@@ -11,34 +11,39 @@ const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n').map(line => line.split(" ").map(Number));
 
-const N = parseInt(input[0]);
+const N = input[0][0];
+const size = input[1];
+const TP = input[2];
 
+function solution_T(N, size, TP) {
+    let sumT = 0;
+    const [T, P] = TP;
+    const maxT = Math.max(...size);
 
-const size = input[1].split(' ').map(Number);
-
-const TP = input[2].split(' ').map(Number);
-
-
-
-solution(input);
-
-function solution(input){
-    let sumT = 0 ;
-    let sumP = 0;
-    const maxT = N / TP[0] +1;
-
-    for(let i = 0; i < 6; i++){
-        for(let j = 1; j <= maxT; j++ ){
-            if(input[i] - TP[0] * j <= 0){
-                sumT =+ j;
-            }
-            else{
-                continue;
+    for (let i = 0; i < 6; i++) {
+        for (let j = 1; j <= maxT; j++) {
+            if (size[i] - T * j <= 0) {
+                sumT += j;
+                break;
             }
         }
     }
-
-    const result = solution(N, size, TP);
-    console.log(result);
+    return sumT;
 }
 
+const result_T = solution_T(N, size, TP);
+
+function solution_P(N, TP){
+    let bundle_P =0;
+    let extra_P = 0;
+    const [T, P] = TP;
+    bundle_P = Math.floor(N / P);
+    extra_P = N % P;
+
+    return [ bundle_P , extra_P ];
+}
+
+const [result_P_bundle , result_P_extra] = solution_P(N, TP);
+
+console.log(result_T);
+console.log(result_P_bundle , result_P_extra);
