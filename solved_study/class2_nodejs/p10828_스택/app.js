@@ -58,9 +58,6 @@ function stackSolution(commands) {
             case 'pop':
                 result.push(stack.length === 0 ? -1 : stack.pop());
                 break;
-            case 'size':
-                result.push(stack.length);
-                break;
             case 'empty':
                 result.push(stack.length === 0 ? 1 : 0);
                 break;
