@@ -2,7 +2,7 @@
 Date: 7/13
 No: 10845
 Tier: 실버4
-Name: 스택
+Name: 큐
 Language: node.js
 */
 
